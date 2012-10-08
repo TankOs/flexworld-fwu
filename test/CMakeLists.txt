@@ -17,6 +17,7 @@ set(
 	${SRC_DIR}/TestLooseOctree.cpp
 	${SRC_DIR}/TestMath.cpp
 	${SRC_DIR}/TestMatrix.cpp
+	${SRC_DIR}/TestQuaternion.cpp
 )
 
 include_directories( ${PROJECT_SOURCE_DIR}/../include )

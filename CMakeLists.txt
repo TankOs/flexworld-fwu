@@ -33,6 +33,8 @@ set(
 	${INC_DIR}/FWU/Math.inl
 	${INC_DIR}/FWU/Matrix.hpp
 	${INC_DIR}/FWU/Matrix.inl
+	${INC_DIR}/FWU/Quaternion.hpp
+	${INC_DIR}/FWU/Quaternion.inl
 	${SRC_DIR}/FWU/Log.cpp
 	${SRC_DIR}/FWU/Math.cpp
 )
