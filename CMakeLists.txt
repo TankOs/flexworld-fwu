@@ -8,12 +8,6 @@ set( FWU_BUILD_TEST TRUE CACHE BOOL "Build test suite." )
 set( FWU_BUILD_DOCS FALSE CACHE BOOL "Build Doxygen API documentation." )
 set( FWU_SKIP_INSTALL FALSE CACHE BOOL "Do not run install target (useful when including lib in projects)." )
 
-if( FWU_BUILD_SHARED_LIBS )
-	set( LIB_TYPE SHARED )
-else()
-	set( LIB_TYPE STATIC )
-endif()
-
 if( CMAKE_COMPILER_IS_GNUCXX )
 	if( NOT CMAKE_CXX_FLAGS )
 		set( CMAKE_CXX_FLAGS "-std=c++0x -Wall -Wextra -Wshadow -Wconversion -pedantic" CACHE STRING "C++ compiler flags." FORCE )
@@ -50,12 +44,30 @@ add_library( fwu ${LIB_TYPE} ${SOURCES} )
 
 target_link_libraries( fwu ${SFML_SYSTEM_LIBRARY} )
 
+if( FWU_BUILD_SHARED_LIBS )
+	set( LIB_TYPE SHARED )
+
+	set_target_properties( fwu PROPERTIES DEBUG_POSTFIX -d )
+else()
+	set( LIB_TYPE STATIC )
+	add_definitions( -DFWU_STATIC )
+
+	set_target_properties( fwu PROPERTIES DEBUG_POSTFIX -s-d )
+	set_target_properties( fwu PROPERTIES RELEASE_POSTFIX -s )
+	set_target_properties( fwu PROPERTIES MINSIZEREL_POSTFIX -s )
+endif()
+
 if( NOT FWU_SKIP_INSTALL )
 	install(
 		TARGETS fwu
 		RUNTIME DESTINATION bin COMPONENT bin
 		LIBRARY DESTINATION lib COMPONENT bin
 		ARCHIVE DESTINATION lib COMPONENT dev
+	)
+
+	install(
+		DIRECTORY include
+		DESTINATION .
 	)
 endif()
 
