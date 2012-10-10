@@ -147,4 +147,64 @@ BOOST_AUTO_TEST_CASE( TestQuaternion ) {
 		BOOST_CHECK( std::abs( q.get_y() - 0.0233919f) <= TOLERANCE );
 		BOOST_CHECK( std::abs( q.get_z() - 0.140052f) <= TOLERANCE );
 	}
+
+	// Multiply (combine).
+	{
+		// Multiplying identities doesn't change anything.
+		{
+			FloatQuaternion a;
+			FloatQuaternion b;
+			FloatQuaternion result;
+
+			result = a * b;
+			a *= result;
+
+			BOOST_CHECK( a == FloatQuaternion() );
+			BOOST_CHECK( b == FloatQuaternion() );
+			BOOST_CHECK( result == FloatQuaternion() );
+		}
+
+		// Random combinations.
+		{
+			FloatQuaternion result =
+				FloatQuaternion( 33.2f, sf::Vector3f( 1.0f, 0.0f, 0.0f ) ) *
+				FloatQuaternion( 93.1f, sf::Vector3f( 0.0f, 1.0f, 0.0f ) ) *
+				FloatQuaternion( 253.9f, sf::Vector3f( 0.0f, 0.0f, 1.0f ) )
+			;
+
+			BOOST_CHECK( std::abs( result.get_w() - 784783.5625f ) <= TOLERANCE );
+			BOOST_CHECK( std::abs( result.get_x() - 23671.2890625f ) <= TOLERANCE );
+			BOOST_CHECK( std::abs( result.get_y() - 8336.380859375f ) <= TOLERANCE );
+			BOOST_CHECK( std::abs( result.get_z() - 3344.81982421875f ) <= TOLERANCE );
+
+			result = FloatQuaternion();
+			result *= FloatQuaternion( 33.2f, sf::Vector3f( 1.0f, 0.0f, 0.0f ) );
+			result *= FloatQuaternion( 93.1f, sf::Vector3f( 0.0f, 1.0f, 0.0f ) );
+			result *= FloatQuaternion( 253.9f, sf::Vector3f( 0.0f, 0.0f, 1.0f ) );
+
+			BOOST_CHECK( std::abs( result.get_w() - 784783.5625f ) <= TOLERANCE );
+			BOOST_CHECK( std::abs( result.get_x() - 23671.2890625f ) <= TOLERANCE );
+			BOOST_CHECK( std::abs( result.get_y() - 8336.380859375f ) <= TOLERANCE );
+			BOOST_CHECK( std::abs( result.get_z() - 3344.81982421875f ) <= TOLERANCE );
+		}
+	}
+
+	// Conjugate.
+	{
+		FloatQuaternion q( 1.0f, sf::Vector3f( 2.0f, 3.0f, 4.0f ) );
+
+		BOOST_CHECK( q.make_conjugate() == FloatQuaternion( 1.0f, sf::Vector3f( -2.0f, -3.0f, -4.0f ) ) );
+	}
+
+	// Rotate vector.
+	{
+		sf::Vector3f vector =
+			FloatQuaternion( 100.0f, sf::Vector3f( 20.0f, 10.0f, 5.0f ) ) *
+			sf::Vector3f( 1.0f, 2.0f, 3.0f )
+		;
+
+		BOOST_CHECK( std::abs( vector.x - 15675.0f ) <= TOLERANCE );
+		BOOST_CHECK( std::abs( vector.y - 9050.0f ) <= TOLERANCE );
+		BOOST_CHECK( std::abs( vector.z - 34975.0f ) <= TOLERANCE );
+	}
 }

@@ -76,6 +76,11 @@ class Quaternion {
 		 */
 		T get_z() const;
 
+		/** Make conjugate.
+		 * @return Conjugate.
+		 */
+		Quaternion<T> make_conjugate() const;
+
 		/** Equality.
 		 * @param other Other quaternion.
 		 */
@@ -91,6 +96,26 @@ class Quaternion {
 		 * @return Quaternion multiplied by scalar.
 		 */
 		Quaternion<T> operator*( T scalar ) const;
+
+		/** Combine two quaternions.
+		 * Note: Multiplying quaternions is not commutative!
+		 * @param q Other quaternion.
+		 * @return *this and q combined.
+		 */
+		Quaternion<T> operator*( const Quaternion<T>& q ) const;
+
+		/** Combine this quaternion with another one.
+		 * Note: Multiplying quaternions is not commutative!
+		 * @param q Other quaternion.
+		 * @return *this.
+		 */
+		Quaternion<T>& operator*=( const Quaternion<T>& q );
+
+		/** Rotate vector.
+		 * @param vector Vector.
+		 * @return Rotated vector.
+		 */
+		Vector operator*( const Vector& vector ) const;
 
 	private:
 		Vector m_vector;

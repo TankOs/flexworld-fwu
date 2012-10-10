@@ -109,4 +109,54 @@ Quaternion<T> Quaternion<T>::operator*( T scalar ) const {
 	);
 }
 
+template <typename T>
+Quaternion<T> Quaternion<T>::operator*( const Quaternion<T>& q ) const {
+	return Quaternion<T>{
+		m_w * q.m_w - m_vector.x * q.m_vector.x - m_vector.y * q.m_vector.y - m_vector.z * q.m_vector.z,
+		Vector{
+			m_w * q.m_vector.x + m_vector.x * q.m_w        + m_vector.y * q.m_vector.z - m_vector.z * q.m_vector.y,
+			m_w * q.m_vector.y - m_vector.x * q.m_vector.z + m_vector.y * q.m_w        + m_vector.z * q.m_vector.x,
+			m_w * q.m_vector.z + m_vector.x * q.m_vector.y - m_vector.y * q.m_vector.x + m_vector.z * q.m_w
+		}
+	};
+}
+
+template <typename T>
+Quaternion<T>& Quaternion<T>::operator*=( const Quaternion<T>& q ) {
+	float w{ m_w * q.m_w - m_vector.x * q.m_vector.x - m_vector.y * q.m_vector.y - m_vector.z * q.m_vector.z};
+	Vector vector{
+		m_w * q.m_vector.x + m_vector.x * q.m_w        + m_vector.y * q.m_vector.z - m_vector.z * q.m_vector.y,
+		m_w * q.m_vector.y - m_vector.x * q.m_vector.z + m_vector.y * q.m_w        + m_vector.z * q.m_vector.x,
+		m_w * q.m_vector.z + m_vector.x * q.m_vector.y - m_vector.y * q.m_vector.x + m_vector.z * q.m_w
+	};
+
+	std::swap( w, m_w );
+	std::swap( vector, m_vector );
+
+	return *this;
+}
+
+template <typename T>
+typename Quaternion<T>::Vector Quaternion<T>::operator*( const Vector& vector ) const {
+	Quaternion<T> combined =
+		*this *
+		Quaternion<T>( 0, vector ) *
+		make_conjugate()
+	;
+
+	return combined.get_vector();
+}
+
+template <typename T>
+Quaternion<T> Quaternion<T>::make_conjugate() const {
+	return Quaternion<T>(
+		m_w,
+		Vector(
+			-m_vector.x,
+			-m_vector.y,
+			-m_vector.z
+		)
+	);
+}
+
 }
