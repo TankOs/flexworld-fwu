@@ -44,8 +44,6 @@ include_directories( ${SFML_INCLUDE_DIRS} )
 
 add_library( fwu ${LIB_TYPE} ${SOURCES} )
 
-target_link_libraries( fwu ${SFML_SYSTEM_LIBRARY} )
-
 if( FWU_BUILD_SHARED_LIBS )
 	set( LIB_TYPE SHARED )
 
