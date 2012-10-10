@@ -159,4 +159,14 @@ Quaternion<T> Quaternion<T>::make_conjugate() const {
 	);
 }
 
+template <typename T>
+void Quaternion<T>::normalize() {
+	T length = std::sqrt( m_w * m_w + m_vector.x * m_vector.x + m_vector.y * m_vector.y + m_vector.z * m_vector.z );
+
+	m_w /= length;
+	m_vector.x /= length;
+	m_vector.y /= length;
+	m_vector.z /= length;
+}
+
 }

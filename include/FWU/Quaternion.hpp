@@ -5,6 +5,10 @@
 namespace util {
 
 /** Quaternion.
+ * This quaternion implementation does NOT normalize the quaternion. Before you
+ * create a matrix or rotate vectors, make sure that the quaternion is
+ * normalized.
+ *
  * @tparam T Number type.
  */
 template <typename T>
@@ -80,6 +84,10 @@ class Quaternion {
 		 * @return Conjugate.
 		 */
 		Quaternion<T> make_conjugate() const;
+
+		/** Normalize.
+		 */
+		void normalize();
 
 		/** Equality.
 		 * @param other Other quaternion.

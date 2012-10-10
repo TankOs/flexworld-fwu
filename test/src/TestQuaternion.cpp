@@ -207,4 +207,15 @@ BOOST_AUTO_TEST_CASE( TestQuaternion ) {
 		BOOST_CHECK( std::abs( vector.y - 9050.0f ) <= TOLERANCE );
 		BOOST_CHECK( std::abs( vector.z - 34975.0f ) <= TOLERANCE );
 	}
+
+	// Normalize.
+	{
+		FloatQuaternion q{ 1234.56f, sf::Vector3f{ 6543.21f, 9874.59f, 4982.35f } };
+		q.normalize();
+
+		BOOST_CHECK( std::abs( q.get_w() - 0.095627911388874053955078125f ) <= TOLERANCE );
+		BOOST_CHECK( std::abs( q.get_x() - 0.50683116912841796875f ) <= TOLERANCE );
+		BOOST_CHECK( std::abs( q.get_y() - 0.764876842498779296875f ) <= TOLERANCE );
+		BOOST_CHECK( std::abs( q.get_z() - 0.3859283626079559326171875f ) <= TOLERANCE );
+	}
 }
