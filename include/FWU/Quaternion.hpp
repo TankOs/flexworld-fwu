@@ -90,27 +90,45 @@ class Quaternion {
 		void normalize();
 
 		/** Equality.
-		 * @param other Other quaternion.
+		 * @param first First quaternion.
+		 * @param second Second quaternion.
+		 * @return true if equal.
 		 */
-		bool operator==( const Quaternion<T>& other ) const;
+		template <typename TT>
+		friend bool operator==( const Quaternion<TT>& first, const Quaternion<TT>& second );
 
 		/** Unequality.
-		 * @param other Other quaternion.
+		 * @param first First quaternion.
+		 * @param second Second quaternion.
+		 * @return true if not equal.
 		 */
-		bool operator!=( const Quaternion<T>& other ) const;
+		template <typename TT>
+		friend bool operator!=( const Quaternion<TT>& first, const Quaternion<TT>& second );
 
 		/** Scalar product.
+		 * @param quaternion Quaternion.
 		 * @param scalar Scalar.
 		 * @return Quaternion multiplied by scalar.
 		 */
-		Quaternion<T> operator*( T scalar ) const;
+		template <typename TT>
+		friend Quaternion<TT> operator*( const Quaternion<TT>& quaternion, TT scalar );
 
 		/** Combine two quaternions.
 		 * Note: Multiplying quaternions is not commutative!
-		 * @param q Other quaternion.
-		 * @return *this and q combined.
+		 * @param first First quaternion.
+		 * @param second Second quaternion.
+		 * @return first and second combined.
 		 */
-		Quaternion<T> operator*( const Quaternion<T>& q ) const;
+		template <typename TT>
+		friend Quaternion<TT> operator*( const Quaternion<TT>& first, const Quaternion<TT>& second );
+
+		/** Rotate vector.
+		 * @param quaternion Quaternion.
+		 * @param vector Vector.
+		 * @return Rotated vector.
+		 */
+		template <typename TT>
+		friend typename Quaternion<TT>::Vector operator*( const Quaternion<TT>& quaternion, const typename Quaternion<TT>::Vector& vector );
 
 		/** Combine this quaternion with another one.
 		 * Note: Multiplying quaternions is not commutative!
@@ -118,12 +136,6 @@ class Quaternion {
 		 * @return *this.
 		 */
 		Quaternion<T>& operator*=( const Quaternion<T>& q );
-
-		/** Rotate vector.
-		 * @param vector Vector.
-		 * @return Rotated vector.
-		 */
-		Vector operator*( const Vector& vector ) const;
 
 	private:
 		Vector m_vector;
