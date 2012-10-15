@@ -66,4 +66,8 @@ sf::Vector3f dot_product( const sf::Vector3f& a, const sf::Vector3f& b ) {
 	);
 }
 
+float rad_to_deg( float rad ) {
+	return rad * 180.0f / PI;
+}
+
 }

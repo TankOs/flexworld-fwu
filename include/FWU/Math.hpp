@@ -66,6 +66,12 @@ sf::Vector3f polar_to_vector( float theta, float phi, float r = 1.f );
  */
 float deg_to_rad( float deg );
 
+/** Convert radians to degrees.
+ * @param rad Radians.
+ * @return Degrees.
+ */
+float rad_to_deg( float rad );
+
 /** Dot product.
  * @param a Vector.
  * @param b Vector.

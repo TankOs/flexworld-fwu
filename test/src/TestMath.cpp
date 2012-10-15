@@ -3,6 +3,8 @@
 #include <boost/test/unit_test.hpp>
 #include <cmath>
 
+static const float TOLERANCE = 0.000001f;
+
 BOOST_AUTO_TEST_CASE( TestMath ) {
 	BOOST_MESSAGE( "Testing math..." );
 
@@ -78,7 +80,7 @@ BOOST_AUTO_TEST_CASE( TestMath ) {
 			sf::Vector2f( 10, 10 )
 		};
 
-		BOOST_CHECK( std::abs( calc_triangle_area( points[0], points[1], points[2] ) - 12.5f ) <= 0.000001f );
+		BOOST_CHECK( std::abs( calc_triangle_area( points[0], points[1], points[2] ) - 12.5f ) <= TOLERANCE );
 	}
 
 	// Calc area of 2D rect.
@@ -92,10 +94,16 @@ BOOST_AUTO_TEST_CASE( TestMath ) {
 	// Degrees to radians.
 	{
 		BOOST_CHECK( deg_to_rad( 0 ) == 0 );
-		BOOST_CHECK( std::abs( deg_to_rad( 90 ) - 1.57079633f ) < 0.000001f);
-		BOOST_CHECK( std::abs( deg_to_rad( 180 ) - 3.14159265f ) < 0.000001f);
-		BOOST_CHECK( std::abs( deg_to_rad( 270 ) - 4.71238898f ) < 0.000001f);
-		BOOST_CHECK( std::abs( deg_to_rad( 360 ) - 6.28318531f ) < 0.000001f);
+		BOOST_CHECK( std::abs( deg_to_rad( 90 ) - 1.57079633f ) < TOLERANCE);
+		BOOST_CHECK( std::abs( deg_to_rad( 180 ) - 3.14159265f ) < TOLERANCE);
+		BOOST_CHECK( std::abs( deg_to_rad( 270 ) - 4.71238898f ) < TOLERANCE);
+		BOOST_CHECK( std::abs( deg_to_rad( 360 ) - 6.28318531f ) < TOLERANCE);
+	}
+
+	// Radians to degrees.
+	{
+		BOOST_CHECK( rad_to_deg( 0 ) == 0.0f );
+		BOOST_CHECK( std::abs( rad_to_deg( 90.0f ) - (90.0f * 180.0f / util::PI) <= TOLERANCE ) );
 	}
 
 	// Convert polar coordinate to vector.
