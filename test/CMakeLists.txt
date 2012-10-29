@@ -13,6 +13,7 @@ set( INC_DIR "src" )
 set(
 	SOURCES
 	${SRC_DIR}/Test.cpp
+	${SRC_DIR}/TestAxis.cpp
 	${SRC_DIR}/TestCuboid.cpp
 	${SRC_DIR}/TestLooseOctree.cpp
 	${SRC_DIR}/TestMath.cpp

@@ -23,6 +23,7 @@ set( INC_DIR "include" )
 
 set(
 	SOURCES
+	${INC_DIR}/FWU/Axis.hpp
 	${INC_DIR}/FWU/Config.hpp
 	${INC_DIR}/FWU/Cuboid.hpp
 	${INC_DIR}/FWU/Cuboid.inl
