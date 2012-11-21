@@ -1,5 +1,6 @@
 #include <FWU/Quaternion.hpp>
 #include <FWU/Math.hpp>
+#include <FWU/Axis.hpp>
 
 #include <SFML/System/Vector3.hpp>
 #include <boost/test/unit_test.hpp>
@@ -217,5 +218,20 @@ BOOST_AUTO_TEST_CASE( TestQuaternion ) {
 		BOOST_CHECK( std::abs( q.get_x() - 0.50683116912841796875f ) <= TOLERANCE );
 		BOOST_CHECK( std::abs( q.get_y() - 0.764876842498779296875f ) <= TOLERANCE );
 		BOOST_CHECK( std::abs( q.get_z() - 0.3859283626079559326171875f ) <= TOLERANCE );
+	}
+
+	// Convert to Euler angles.
+	{
+		FloatQuaternion q;
+
+		q = FloatQuaternion::from_angle_axis( deg_to_rad( 5.0f ), axis::x ) * q;
+		q = FloatQuaternion::from_angle_axis( deg_to_rad( 10.0f ), axis::y ) * q;
+		q = FloatQuaternion::from_angle_axis( deg_to_rad( 15.0f ), axis::z ) * q;
+
+		sf::Vector3f euler_angles = q.to_euler();
+
+		BOOST_CHECK( std::abs( euler_angles.x - deg_to_rad( 5.0f ) ) <= TOLERANCE );
+		BOOST_CHECK( std::abs( euler_angles.y - deg_to_rad( 10.0f ) ) <= TOLERANCE );
+		BOOST_CHECK( std::abs( euler_angles.z - deg_to_rad( 15.0f ) ) <= TOLERANCE );
 	}
 }

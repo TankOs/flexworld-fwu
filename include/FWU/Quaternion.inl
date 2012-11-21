@@ -171,4 +171,19 @@ typename Quaternion<T>::Vector operator*( const Quaternion<T>& quaternion, const
 	;
 }
 
+template <typename T>
+sf::Vector3f Quaternion<T>::to_euler() const {
+	return sf::Vector3f{
+		std::atan2(
+			2.0f * (m_w * m_vector.x + m_vector.y * m_vector.z),
+			1.0f - 2.0f * (m_vector.x * m_vector.x + m_vector.y * m_vector.y)
+		),
+		std::asin( 2.0f * (m_w * m_vector.y - m_vector.z * m_vector.x) ),
+		std::atan2(
+			2.0f * (m_w * m_vector.z + m_vector.x * m_vector.y ),
+			1.0f - 2.0f * (m_vector.y * m_vector.y + m_vector.z * m_vector.z)
+		)
+	};
+}
+
 }

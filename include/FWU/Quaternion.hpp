@@ -137,6 +137,11 @@ class Quaternion {
 		 */
 		Quaternion<T>& operator*=( const Quaternion<T>& q );
 
+		/** Convert to Euler angles.
+		 * @return Euler angles.
+		 */
+		sf::Vector3f to_euler() const;
+
 	private:
 		Vector m_vector;
 		T m_w;

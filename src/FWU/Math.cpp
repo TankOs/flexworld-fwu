@@ -78,4 +78,18 @@ sf::Vector3f inverse( const sf::Vector3f& v ) {
 	};
 }
 
+sf::Vector3f angle_axis_to_euler( float angle, const sf::Vector3f& axis ) {
+	return sf::Vector3f{
+		std::atan2(
+			axis.x * std::sin( angle ) - axis.y * axis.z * (1.0f - std::cos( angle )),
+			1.0f - (axis.x * axis.x + axis.z * axis.z) * (1.0f - std::cos( angle ))
+		),
+		std::atan2(
+			axis.y * std::sin( angle ) - axis.x * axis.z * (1.0f - std::cos( angle )),
+			1.0f - (axis.y * axis.y + axis.z * axis.z) * (1.0f - std::cos( angle ))
+		),
+		std::asin( axis.x * axis.y * (1.0f - std::cos( angle )) + axis.z * std::sin( angle ) )
+	};
+}
+
 }

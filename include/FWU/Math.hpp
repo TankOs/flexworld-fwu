@@ -85,6 +85,13 @@ sf::Vector3f cross_product( const sf::Vector3f& a, const sf::Vector3f& b );
  */
 sf::Vector3f inverse( const sf::Vector3f& v );
 
+/** Convert angle-axis to Euler angles.
+ * @param angle Angle, in radians.
+ * @param axis Rotation axis.
+ * @return Euler angles.
+ */
+sf::Vector3f angle_axis_to_euler( float angle, const sf::Vector3f& axis );
+
 }
 
 #include "Math.inl"

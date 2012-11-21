@@ -169,4 +169,24 @@ BOOST_AUTO_TEST_CASE( TestMath ) {
 
 		BOOST_CHECK( INVERSE_VECTOR == inverse( VECTOR ) );
 	}
+
+	// Angle-axis to Euler.
+	{
+		sf::Vector3f euler;
+
+		euler = angle_axis_to_euler( deg_to_rad( 22.2f ), sf::Vector3f( 1.0f, 0.0f, 0.0f ) );
+		BOOST_CHECK( std::abs( euler.x - deg_to_rad( 22.2f ) ) <= TOLERANCE );
+		BOOST_CHECK( std::abs( euler.y ) <= TOLERANCE );
+		BOOST_CHECK( std::abs( euler.z ) <= TOLERANCE );
+
+		euler = angle_axis_to_euler( deg_to_rad( 44.4f ), sf::Vector3f( 0.0f, 1.0f, 0.0f ) );
+		BOOST_CHECK( std::abs( euler.x ) <= TOLERANCE );
+		BOOST_CHECK( std::abs( euler.y - deg_to_rad( 44.4f ) ) <= TOLERANCE );
+		BOOST_CHECK( std::abs( euler.z ) <= TOLERANCE );
+
+		euler = angle_axis_to_euler( deg_to_rad( 66.6f ), sf::Vector3f( 0.0f, 0.0f, 1.0f ) );
+		BOOST_CHECK( std::abs( euler.x ) <= TOLERANCE );
+		BOOST_CHECK( std::abs( euler.y ) <= TOLERANCE );
+		BOOST_CHECK( std::abs( euler.z - deg_to_rad( 66.6f ) ) <= TOLERANCE );
+	}
 }
