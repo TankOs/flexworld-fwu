@@ -70,4 +70,12 @@ float rad_to_deg( float rad ) {
 	return rad * 180.0f / PI;
 }
 
+sf::Vector3f inverse( const sf::Vector3f& v ) {
+	return sf::Vector3f{
+		-v.x,
+		-v.y,
+		-v.z
+	};
+}
+
 }

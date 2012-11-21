@@ -162,4 +162,11 @@ BOOST_AUTO_TEST_CASE( TestMath ) {
 		);
 	}
 
+	// Inverse.
+	{
+		static const sf::Vector3f VECTOR{ 1.0f, -2.0f, 3.0f };
+		static const sf::Vector3f INVERSE_VECTOR{ -1.0f, 2.0f, -3.0f };
+
+		BOOST_CHECK( INVERSE_VECTOR == inverse( VECTOR ) );
+	}
 }

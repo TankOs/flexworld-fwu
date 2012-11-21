@@ -79,6 +79,11 @@ float rad_to_deg( float rad );
  */
 sf::Vector3f cross_product( const sf::Vector3f& a, const sf::Vector3f& b );
 
+/** Inverse of vector.
+ * @param v Vector.
+ * @return Inverse of v.
+ */
+sf::Vector3f inverse( const sf::Vector3f& v );
 
 }
 
