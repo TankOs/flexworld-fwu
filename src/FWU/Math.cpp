@@ -4,24 +4,24 @@
 
 namespace util {
 
-float calc_length( const sf::Vector3f& v ) {
+float length( const sf::Vector3f& v ) {
 	return std::sqrt( v.x * v.x + v.y * v.y + v.z * v.z );
 }
 
 void normalize( sf::Vector3f& v ) {
-	float length = calc_length( v );
-	assert( length > 0.0f );
+	float len = length( v );
+	assert( len > 0.0f );
 
-	v.x /= length;
-	v.y /= length;
-	v.z /= length;
+	v.x /= len;
+	v.y /= len;
+	v.z /= len;
 }
 
-float calc_scalar_product( const sf::Vector3f& v0, const sf::Vector3f& v1 ) {
+float dot_product( const sf::Vector3f& v0, const sf::Vector3f& v1 ) {
 	return v0.x * v1.x + v0.y * v1.y + v0.z * v1.z;
 }
 
-float calc_triangle_area( const sf::Vector2f& p0, const sf::Vector2f& p1, const sf::Vector2f& p2 ) {
+float triangle_area( const sf::Vector2f& p0, const sf::Vector2f& p1, const sf::Vector2f& p2 ) {
 	float lengths[3] = {
 		std::sqrt(
 			+ (p1.x - p0.x) * (p1.x - p0.x)
@@ -42,7 +42,7 @@ float calc_triangle_area( const sf::Vector2f& p0, const sf::Vector2f& p1, const 
 	return std::sqrt( h_perimeter * (h_perimeter - lengths[0]) * (h_perimeter - lengths[1]) * (h_perimeter - lengths[2]) );
 }
 
-float calc_rect_area( float a, float b ) {
+float rect_area( float a, float b ) {
 	return a * b;
 }
 
@@ -58,7 +58,7 @@ float deg_to_rad( float deg ) {
 	return deg / 180.0f * PI;
 }
 
-sf::Vector3f dot_product( const sf::Vector3f& a, const sf::Vector3f& b ) {
+sf::Vector3f cross_product( const sf::Vector3f& a, const sf::Vector3f& b ) {
 	return sf::Vector3f(
 		a.y * b.z - a.z * b.y,
 		a.z * b.x - a.x * b.z,

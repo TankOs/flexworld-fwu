@@ -8,7 +8,7 @@ namespace util {
 
 template <typename T>
 Quaternion<T> Quaternion<T>::from_angle_axis( T angle, const Vector& axis ) {
-	assert( calc_length( axis ) <= 1 );
+	assert( length( axis ) <= 1 );
 
 	const float SIN_ANGLE_OVER_2 = std::sin( angle / 2 );
 

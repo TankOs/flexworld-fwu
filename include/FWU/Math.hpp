@@ -11,19 +11,19 @@ static const float PI = 3.14159265f; ///< PI.
  * @param v Vector.
  * @return Length.
  */
-float calc_length( const sf::Vector3f& v );
+float length( const sf::Vector3f& v );
 
 /** Normalize vector.
  * @param v Vector.
  */
 void normalize( sf::Vector3f& v );
 
-/** Calculate scalar product.
+/** Calculate dot product.
  * @param v0 Vector 0.
  * @param v1 Vector 1.
- * @return Scalar product.
+ * @return Dot product.
  */
-float calc_scalar_product( const sf::Vector3f& v0, const sf::Vector3f& v1 );
+float dot_product( const sf::Vector3f& v0, const sf::Vector3f& v1 );
 
 /** Calculate signum.
  * @param value Value.
@@ -31,7 +31,7 @@ float calc_scalar_product( const sf::Vector3f& v0, const sf::Vector3f& v1 );
  * @return -1 if negative, 0 if zero, 1 if positive.
  */
 template <class T>
-int calc_signum( T value );
+int signum( T value );
 
 /** Calculate area of triangle.
  * The points must be ordered counter-clockwise.
@@ -40,14 +40,14 @@ int calc_signum( T value );
  * @param p2 Point 2.
  * @return Area.
  */
-float calc_triangle_area( const sf::Vector2f& p0, const sf::Vector2f& p1, const sf::Vector2f& p2 );
+float triangle_area( const sf::Vector2f& p0, const sf::Vector2f& p1, const sf::Vector2f& p2 );
 
 /** Calculate area of rect.
  * @param a Length of side A.
  * @param b Length of side B.
  * @return Area.
  */
-float calc_rect_area( float a, float b );
+float rect_area( float a, float b );
 
 /** Convert polar coordinates to vector.
  * The resulting vector is adjusted to match OpenGL's coordinate system. When
@@ -72,12 +72,12 @@ float deg_to_rad( float deg );
  */
 float rad_to_deg( float rad );
 
-/** Dot product.
+/** Cross product.
  * @param a Vector.
  * @param b Vector.
- * @return Dot product a x b.
+ * @return Cross product a x b.
  */
-sf::Vector3f dot_product( const sf::Vector3f& a, const sf::Vector3f& b );
+sf::Vector3f cross_product( const sf::Vector3f& a, const sf::Vector3f& b );
 
 
 }

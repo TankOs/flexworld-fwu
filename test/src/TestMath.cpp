@@ -15,28 +15,28 @@ BOOST_AUTO_TEST_CASE( TestMath ) {
 		sf::Vector3f v;
 
 		v = sf::Vector3f( 2.0f, 0.0f, 0.0f );
-		BOOST_CHECK( calc_length( v ) == 2.0f );
+		BOOST_CHECK( length( v ) == 2.0f );
 
 		v = sf::Vector3f( -2.0f, 0.0f, 0.0f );
-		BOOST_CHECK( calc_length( v ) == 2.0f );
+		BOOST_CHECK( length( v ) == 2.0f );
 
 		v = sf::Vector3f( 0.0f, 2.0f, 0.0f );
-		BOOST_CHECK( calc_length( v ) == 2.0f );
+		BOOST_CHECK( length( v ) == 2.0f );
 
 		v = sf::Vector3f( 0.0f, -2.0f, 0.0f );
-		BOOST_CHECK( calc_length( v ) == 2.0f );
+		BOOST_CHECK( length( v ) == 2.0f );
 
 		v = sf::Vector3f( 0.0f, 0.0f, 2.0f );
-		BOOST_CHECK( calc_length( v ) == 2.0f );
+		BOOST_CHECK( length( v ) == 2.0f );
 
 		v = sf::Vector3f( 0.0f, 0.0f, -2.0f );
-		BOOST_CHECK( calc_length( v ) == 2.0f );
+		BOOST_CHECK( length( v ) == 2.0f );
 
 		v = sf::Vector3f( 1.0f, 2.0f, 3.0f );
-		BOOST_CHECK( calc_length( v ) == std::sqrt( 14.0f ) );
+		BOOST_CHECK( length( v ) == std::sqrt( 14.0f ) );
 
 		v = sf::Vector3f( 0.0f, 0.0f, 0.0f );
-		BOOST_CHECK( calc_length( v ) == std::sqrt( 0.0f ) );
+		BOOST_CHECK( length( v ) == std::sqrt( 0.0f ) );
 	}
 
 	// Normalize vector.
@@ -61,15 +61,15 @@ BOOST_AUTO_TEST_CASE( TestMath ) {
 		sf::Vector3f v0( 10.0f, 5.0f, 5.0f );
 		sf::Vector3f v1( 0.5f, 0.5f, 0.0f );
 
-		float result = calc_scalar_product( v0, v1 );
+		float result = dot_product( v0, v1 );
 		BOOST_CHECK( result == 7.5f );
 	}
 
 	// Signum.
 	{
-		BOOST_CHECK( calc_signum( -10 ) == -1 );
-		BOOST_CHECK( calc_signum( 10 ) == 1 );
-		BOOST_CHECK( calc_signum( 0 ) == 0 );
+		BOOST_CHECK( signum( -10 ) == -1 );
+		BOOST_CHECK( signum( 10 ) == 1 );
+		BOOST_CHECK( signum( 0 ) == 0 );
 	}
 
 	// Calc area of 2D triangle.
@@ -80,7 +80,7 @@ BOOST_AUTO_TEST_CASE( TestMath ) {
 			sf::Vector2f( 10, 10 )
 		};
 
-		BOOST_CHECK( std::abs( calc_triangle_area( points[0], points[1], points[2] ) - 12.5f ) <= TOLERANCE );
+		BOOST_CHECK( std::abs( triangle_area( points[0], points[1], points[2] ) - 12.5f ) <= TOLERANCE );
 	}
 
 	// Calc area of 2D rect.
@@ -88,7 +88,7 @@ BOOST_AUTO_TEST_CASE( TestMath ) {
 		float a = 10.0f;
 		float b = 30.0f;
 
-		BOOST_CHECK( calc_rect_area( a, b ) == a * b );
+		BOOST_CHECK( rect_area( a, b ) == a * b );
 	}
 
 	// Degrees to radians.
@@ -150,7 +150,7 @@ BOOST_AUTO_TEST_CASE( TestMath ) {
 
 	// Dot product.
 	{
-		sf::Vector3f result = dot_product(
+		sf::Vector3f result = cross_product(
 			sf::Vector3f( 1, 2, 3 ),
 			sf::Vector3f( 3, 2, 1 )
 		);

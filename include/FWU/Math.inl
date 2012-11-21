@@ -1,7 +1,7 @@
 namespace util {
 
 template <class T>
-int calc_signum( T value ) {
+int signum( T value ) {
 	return (T( 0 ) < value) - (value < T( 0 ));
 }
 
