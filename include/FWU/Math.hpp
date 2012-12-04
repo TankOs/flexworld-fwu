@@ -31,7 +31,14 @@ float dot_product( const sf::Vector3f& v0, const sf::Vector3f& v1 );
  * @return -1 if negative, 0 if zero, 1 if positive.
  */
 template <class T>
-int signum( T value );
+T signum( T value );
+
+/** Determine sign of value.
+ * @param value Value.
+ * @return -1 if value < 0, otherwise +1.
+ */
+template <class T>
+T sign( T value );
 
 /** Calculate area of triangle.
  * The points must be ordered counter-clockwise.

@@ -72,6 +72,13 @@ BOOST_AUTO_TEST_CASE( TestMath ) {
 		BOOST_CHECK( signum( 0 ) == 0 );
 	}
 
+	// Sign.
+	{
+		BOOST_CHECK( sign( -1 ) == -1 );
+		BOOST_CHECK( sign( 0 ) == 1 );
+		BOOST_CHECK( sign( 1 ) == 1 );
+	}
+
 	// Calc area of 2D triangle.
 	{
 		sf::Vector2f points[3] = {
