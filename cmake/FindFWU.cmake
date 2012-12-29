@@ -2,7 +2,8 @@
 # Find's FWU library.
 #
 # Input variables:
-#   FWU_ROOT          Additional library search directory.
+#   FWU_ROOT              Additional library search directory.
+#   FWU_STATIC_LIBRARIES  Look for static libraries.
 #
 # Output variables:
 #   FWU_INCLUDE_DIR   Include directory.
@@ -12,7 +13,7 @@ cmake_minimum_required( VERSION 2.8 )
 
 set( FWU_FOUND FALSE )
 
-if( NOT FWU_BUILD_SHARED_LIBS )
+if( FWU_STATIC_LIBRARIES )
 	set( FWU_SUFFIX "-s" )
 	add_definitions( -DFWU_STATIC )
 else()

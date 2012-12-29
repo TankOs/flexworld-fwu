@@ -43,16 +43,18 @@ set(
 include_directories( ${INC_DIR} )
 include_directories( ${SFML_INCLUDE_DIRS} )
 
-add_library( fwu ${LIB_TYPE} ${SOURCES} )
-
 if( FWU_BUILD_SHARED_LIBS )
 	set( LIB_TYPE SHARED )
-
-	set_target_properties( fwu PROPERTIES DEBUG_POSTFIX -d )
 else()
 	set( LIB_TYPE STATIC )
 	add_definitions( -DFWU_STATIC )
+endif()
 
+add_library( fwu ${LIB_TYPE} ${SOURCES} )
+
+if( FWU_BUILD_SHARED_LIBS )
+	set_target_properties( fwu PROPERTIES DEBUG_POSTFIX -d )
+else()
 	set_target_properties( fwu PROPERTIES DEBUG_POSTFIX -s-d )
 	set_target_properties( fwu PROPERTIES RELEASE_POSTFIX -s )
 	set_target_properties( fwu PROPERTIES MINSIZEREL_POSTFIX -s )
