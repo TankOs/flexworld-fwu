@@ -41,7 +41,7 @@ set(
 )
 
 include_directories( ${INC_DIR} )
-include_directories( ${SFML_INCLUDE_DIRS} )
+include_directories( ${SFML_INCLUDE_DIR} )
 
 if( FWU_BUILD_SHARED_LIBS )
 	set( LIB_TYPE SHARED )
