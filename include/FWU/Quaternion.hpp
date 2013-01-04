@@ -142,6 +142,12 @@ class Quaternion {
 		 */
 		sf::Vector3f to_euler() const;
 
+		/** Convert to angle-axis notation.
+		 * @param angle Filled with converted angle.
+		 * @param axis Filled with converted axis.
+		 */
+		void to_angle_axis( float& angle, sf::Vector3f& axis ) const;
+
 	private:
 		Vector m_vector;
 		T m_w;

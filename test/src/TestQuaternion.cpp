@@ -149,6 +149,23 @@ BOOST_AUTO_TEST_CASE( TestQuaternion ) {
 		BOOST_CHECK( std::abs( q.get_z() - 0.140052f) <= TOLERANCE );
 	}
 
+	// Convert to angle-axis notation.
+	{
+		sf::Vector3f axis{ 1.0f, 2.0f, 3.0f };
+		const float ANGLE{ deg_to_rad( 67.123f ) };
+
+		normalize( axis );
+
+		FloatQuaternion q = FloatQuaternion::from_angle_axis( ANGLE, axis );
+		float converted_angle{ 0.0f };
+		sf::Vector3f converted_axis{ 0.0f, 0.0f, 0.0f };
+
+		q.to_angle_axis( converted_angle, converted_axis );
+
+		BOOST_CHECK( std::abs( converted_angle - ANGLE ) <= TOLERANCE );
+		BOOST_CHECK( std::abs( converted_axis.x - axis.x ) <= TOLERANCE );
+	}
+
 	// Multiply (combine).
 	{
 		// Multiplying identities doesn't change anything.

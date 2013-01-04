@@ -186,4 +186,14 @@ sf::Vector3f Quaternion<T>::to_euler() const {
 	};
 }
 
+template <typename T>
+void Quaternion<T>::to_angle_axis( float& angle, sf::Vector3f& axis ) const {
+	const float W_SQRT{ std::sqrt( 1.0f - m_w * m_w ) };
+
+	angle = 2.0f * std::acos( m_w );
+	axis.x = m_vector.x / W_SQRT;
+	axis.y = m_vector.y / W_SQRT;
+	axis.z = m_vector.z / W_SQRT;
+}
+
 }
