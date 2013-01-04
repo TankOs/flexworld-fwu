@@ -13,10 +13,21 @@ static const float PI = 3.14159265f; ///< PI.
  */
 float length( const sf::Vector3f& v );
 
+/** Calculate a vector's length.
+ * @param v Vector.
+ * @return Length.
+ */
+float length( const sf::Vector2f& v );
+
 /** Normalize vector.
  * @param v Vector.
  */
 void normalize( sf::Vector3f& v );
+
+/** Normalize vector.
+ * @param v Vector.
+ */
+void normalize( sf::Vector2f& v );
 
 /** Calculate dot product.
  * @param v0 Vector 0.

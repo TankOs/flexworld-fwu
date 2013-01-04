@@ -10,7 +10,7 @@ BOOST_AUTO_TEST_CASE( TestMath ) {
 
 	using namespace util;
 
-	// Vector length.
+	// Vector length (3 components).
 	{
 		sf::Vector3f v;
 
@@ -39,7 +39,30 @@ BOOST_AUTO_TEST_CASE( TestMath ) {
 		BOOST_CHECK( length( v ) == std::sqrt( 0.0f ) );
 	}
 
-	// Normalize vector.
+	// Vector length (2 components).
+	{
+		sf::Vector2f v;
+
+		v = sf::Vector2f( 2.0f, 0.0f );
+		BOOST_CHECK( length( v ) == 2.0f );
+
+		v = sf::Vector2f( -2.0f, 0.0f );
+		BOOST_CHECK( length( v ) == 2.0f );
+
+		v = sf::Vector2f( 0.0f, 2.0f );
+		BOOST_CHECK( length( v ) == 2.0f );
+
+		v = sf::Vector2f( 0.0f, -2.0f );
+		BOOST_CHECK( length( v ) == 2.0f );
+
+		v = sf::Vector2f( 1.0f, 2.0f );
+		BOOST_CHECK( length( v ) == std::sqrt( 5.0f ) );
+
+		v = sf::Vector2f( 0.0f, 0.0f );
+		BOOST_CHECK( length( v ) == std::sqrt( 0.0f ) );
+	}
+
+	// Normalize vector (3 components).
 	{
 		sf::Vector3f v;
 
@@ -54,6 +77,19 @@ BOOST_AUTO_TEST_CASE( TestMath ) {
 		v = sf::Vector3f( 0.0f, 0.0f, 10.0f );
 		normalize( v );
 		BOOST_CHECK( v == sf::Vector3f( 0.0f, 0.0f, 1.0f ) );
+	}
+
+	// Normalize vector (2 components).
+	{
+		sf::Vector2f v;
+
+		v = sf::Vector2f( 10.0f, 0.0f );
+		normalize( v );
+		BOOST_CHECK( v == sf::Vector2f( 1.0f, 0.0f ) );
+
+		v = sf::Vector2f( 0.0f, 10.0f );
+		normalize( v );
+		BOOST_CHECK( v == sf::Vector2f( 0.0f, 1.0f ) );
 	}
 
 	// Scalar product.

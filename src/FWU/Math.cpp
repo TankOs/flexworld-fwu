@@ -8,6 +8,10 @@ float length( const sf::Vector3f& v ) {
 	return std::sqrt( v.x * v.x + v.y * v.y + v.z * v.z );
 }
 
+float length( const sf::Vector2f& v ) {
+	return std::sqrt( v.x * v.x + v.y * v.y );
+}
+
 void normalize( sf::Vector3f& v ) {
 	float len = length( v );
 	assert( len > 0.0f );
@@ -15,6 +19,14 @@ void normalize( sf::Vector3f& v ) {
 	v.x /= len;
 	v.y /= len;
 	v.z /= len;
+}
+
+void normalize( sf::Vector2f& v ) {
+	float len = length( v );
+	assert( len > 0.0f );
+
+	v.x /= len;
+	v.y /= len;
 }
 
 float dot_product( const sf::Vector3f& v0, const sf::Vector3f& v1 ) {
