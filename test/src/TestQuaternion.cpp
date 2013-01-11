@@ -226,6 +226,18 @@ BOOST_AUTO_TEST_CASE( TestQuaternion ) {
 		BOOST_CHECK( std::abs( vector.z - 34975.0f ) <= TOLERANCE );
 	}
 
+	// Rotate vector (y rotation).
+	{
+		sf::Vector3f vector =
+			FloatQuaternion::from_angle_axis( util::deg_to_rad( 180.0f ), sf::Vector3f( 0.0f, 1.0f, 0.0f ) ) *
+			sf::Vector3f( 0.0f, 0.0f, -1.0f )
+		;
+
+		BOOST_CHECK( std::abs( vector.x - 0.0f ) <= TOLERANCE );
+		BOOST_CHECK( std::abs( vector.y - 0.0f ) <= TOLERANCE );
+		BOOST_CHECK( std::abs( vector.z - 1.0f ) <= TOLERANCE );
+	}
+
 	// Normalize.
 	{
 		FloatQuaternion q{ 1234.56f, sf::Vector3f{ 6543.21f, 9874.59f, 4982.35f } };
@@ -250,5 +262,47 @@ BOOST_AUTO_TEST_CASE( TestQuaternion ) {
 		BOOST_CHECK( std::abs( euler_angles.x - deg_to_rad( 5.0f ) ) <= TOLERANCE );
 		BOOST_CHECK( std::abs( euler_angles.y - deg_to_rad( 10.0f ) ) <= TOLERANCE );
 		BOOST_CHECK( std::abs( euler_angles.z - deg_to_rad( 15.0f ) ) <= TOLERANCE );
+	}
+
+	// Construct from Euler angles.
+	{
+		FloatQuaternion q;
+		
+		q = FloatQuaternion::from_euler( sf::Vector3f{ 0.0f, 0.0f, 0.0f } );
+		BOOST_CHECK( std::abs( q.get_w() - 1.0f ) <= TOLERANCE );
+		BOOST_CHECK( std::abs( q.get_x() - 0.0f ) <= TOLERANCE );
+		BOOST_CHECK( std::abs( q.get_y() - 0.0f ) <= TOLERANCE );
+		BOOST_CHECK( std::abs( q.get_z() - 0.0f ) <= TOLERANCE );
+
+		q = FloatQuaternion::from_euler( sf::Vector3f{ util::deg_to_rad( 93.5f ), 0.0f, 0.0f } );
+		BOOST_CHECK( std::abs( q.get_w() - 0.6851829f ) <= TOLERANCE );
+		BOOST_CHECK( std::abs( q.get_x() - 0.0f ) <= TOLERANCE );
+		BOOST_CHECK( std::abs( q.get_y() - 0.0f ) <= TOLERANCE );
+		BOOST_CHECK( std::abs( q.get_z() - 0.7283709f ) <= TOLERANCE );
+
+		q = FloatQuaternion::from_euler( sf::Vector3f{ 0.0f, util::deg_to_rad( 233.0f ), 0.0f } );
+		BOOST_CHECK( std::abs( q.get_w() - -0.446197f ) <= TOLERANCE );
+		BOOST_CHECK( std::abs( q.get_x() - 0.0f ) <= TOLERANCE );
+		BOOST_CHECK( std::abs( q.get_y() - 0.8949343f ) <= TOLERANCE );
+		BOOST_CHECK( std::abs( q.get_z() - 0.0f ) <= TOLERANCE );
+
+		q = FloatQuaternion::from_euler( sf::Vector3f{ 0.0f, 0.0f, util::deg_to_rad( 341.2f ) } );
+		BOOST_CHECK( std::abs( q.get_w() - -0.986572f ) <= TOLERANCE );
+		BOOST_CHECK( std::abs( q.get_x() - 0.163325f ) <= TOLERANCE );
+		BOOST_CHECK( std::abs( q.get_y() - 0.0f ) <= TOLERANCE );
+		BOOST_CHECK( std::abs( q.get_z() - 0.0f ) <= TOLERANCE );
+
+		q = FloatQuaternion::from_euler( sf::Vector3f{ util::deg_to_rad( 143.4f ), util::deg_to_rad( 32.9f ), util::deg_to_rad( 294.6f ) } );
+		BOOST_CHECK( std::abs( q.get_w() - -0.398659f ) <= TOLERANCE );
+		BOOST_CHECK( std::abs( q.get_x() - -0.063558f ) <= TOLERANCE );
+		BOOST_CHECK( std::abs( q.get_y() - 0.417099f ) <= TOLERANCE );
+		BOOST_CHECK( std::abs( q.get_z() - -0.814284f ) <= TOLERANCE );
+		/*
+		q = FloatQuaternion::from_euler( sf::Vector3f{ 0.0f, util::deg_to_rad( 233.0f ), 0.0f, 0.0f } );
+		BOOST_CHECK( std::abs( q.get_w() - f ) <= TOLERANCE );
+		BOOST_CHECK( std::abs( q.get_x() - f ) <= TOLERANCE );
+		BOOST_CHECK( std::abs( q.get_y() - f ) <= TOLERANCE );
+		BOOST_CHECK( std::abs( q.get_z() - f ) <= TOLERANCE );
+		*/
 	}
 }

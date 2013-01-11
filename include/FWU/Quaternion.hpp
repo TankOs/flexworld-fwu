@@ -23,6 +23,12 @@ class Quaternion {
 		 */
 		static Quaternion<T> from_angle_axis( T angle, const Vector& axis );
 
+		/** Construct quaternion from Euler angles.
+		 * @param angles Angles in radians.
+		 * @return Quaternion.
+		 */
+		static Quaternion<T> from_euler( const Vector& angles );
+
 		/** Ctor.
 		 * Default values represent the multiply identity quaternion.
 		 * @param w w.

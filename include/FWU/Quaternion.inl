@@ -25,6 +25,27 @@ Quaternion<T> Quaternion<T>::from_angle_axis( T angle, const Vector& axis ) {
 }
 
 template <typename T>
+Quaternion<T> Quaternion<T>::from_euler( const Vector& angles ) {
+	float c1 = std::cos( angles.y / 2.0f );
+	float c2 = std::cos( angles.x / 2.0f );
+	float c3 = std::cos( angles.z / 2.0f );
+	float s1 = std::sin( angles.y / 2.0f );
+	float s2 = std::sin( angles.x / 2.0f );
+	float s3 = std::sin( angles.z / 2.0f );
+
+	return std::move(
+		Quaternion<T>(
+			c1 * c2 * c3 - s1 * s2 * s3,
+			Vector(
+				s1 * s2 * c3 + c1 * c2 * s3,
+				s1 * c2 * c3 + c1 * s2 * s3,
+				c1 * s2 * c3 - s1 * c2 * s3
+			)
+		)
+	);
+}
+
+template <typename T>
 Quaternion<T>::Quaternion( T w, const Vector& v ) :
 	m_vector{ v },
 	m_w{ w }
